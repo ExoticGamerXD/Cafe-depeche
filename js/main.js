@@ -151,6 +151,30 @@
     update();
   }
 
+  /* ---------- Hero cursor parallax (depth on mouse move) ---------- */
+  const hero = $("#home");
+  const depthEls = $$("[data-hero-depth]");
+  if (hero && depthEls.length && !prefersReduced && window.matchMedia("(hover: hover)").matches) {
+    let tx = 0, ty = 0, raf = null;
+    const apply = () => {
+      depthEls.forEach((el) => {
+        const d = parseFloat(el.getAttribute("data-hero-depth")) || 0;
+        el.style.transform = `translate3d(${(tx * d).toFixed(1)}px, ${(ty * d).toFixed(1)}px, 0)`;
+      });
+      raf = null;
+    };
+    hero.addEventListener("mousemove", (e) => {
+      const r = hero.getBoundingClientRect();
+      tx = (e.clientX - r.left) / r.width - 0.5;   // -0.5 … 0.5
+      ty = (e.clientY - r.top) / r.height - 0.5;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+    hero.addEventListener("mouseleave", () => {
+      tx = 0; ty = 0;
+      if (!raf) raf = requestAnimationFrame(apply);
+    });
+  }
+
   /* ---------- Smooth in-page anchor scrolling ---------- */
   $$('a[href^="#"]').forEach((link) => {
     link.addEventListener("click", (e) => {
@@ -285,68 +309,18 @@
     statusEl.classList.add(isOpen ? "visit__status--open" : "visit__status--closed");
   }
 
-  /* ---------- Gallery carousel (native scroll-snap + drag + progress) ---------- */
-  const track = $("#galleryTrack");
-  if (track) {
-    const bar = $("#galleryBar");
-    const prevBtn = $("#galleryPrev");
-    const nextBtn = $("#galleryNext");
-
-    const stepSize = () => {
-      const slide = track.querySelector(".gallery__slide");
-      const gap = parseFloat(getComputedStyle(track).columnGap) || 16;
-      return slide ? slide.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
+  /* ---------- Gallery reel (expanding panels) ---------- */
+  const reel = $("#reel");
+  if (reel) {
+    const panels = $$(".reel__panel", reel);
+    const canHover = window.matchMedia("(hover: hover)").matches;
+    const setActive = (panel) => {
+      panels.forEach((p) => p.classList.toggle("is-active", p === panel));
     };
-    const maxScroll = () => track.scrollWidth - track.clientWidth;
-
-    const update = () => {
-      const max = maxScroll();
-      const ratio = max > 0 ? Math.min(Math.max(track.scrollLeft / max, 0), 1) : 0;
-      const frac = track.clientWidth / track.scrollWidth; // thumb size
-      if (bar) {
-        bar.style.width = `${Math.max(frac * 100, 12)}%`;
-        bar.style.left = `${ratio * (100 - Math.max(frac * 100, 12))}%`;
-      }
-      if (prevBtn) prevBtn.disabled = track.scrollLeft <= 2;
-      if (nextBtn) nextBtn.disabled = track.scrollLeft >= max - 2;
-    };
-
-    const scrollByStep = (dir) => {
-      track.scrollBy({ left: dir * stepSize(), behavior: prefersReduced ? "auto" : "smooth" });
-    };
-    if (prevBtn) prevBtn.addEventListener("click", () => scrollByStep(-1));
-    if (nextBtn) nextBtn.addEventListener("click", () => scrollByStep(1));
-
-    // Drag-to-scroll for mouse/trackpad (touch uses native scrolling)
-    let down = false, startX = 0, startLeft = 0, moved = false;
-    track.addEventListener("pointerdown", (e) => {
-      if (e.pointerType === "touch") return;
-      down = true; moved = false;
-      startX = e.clientX; startLeft = track.scrollLeft;
-      track.classList.add("is-dragging");
-      track.setPointerCapture(e.pointerId);
+    panels.forEach((panel) => {
+      if (canHover) panel.addEventListener("mouseenter", () => setActive(panel));
+      panel.addEventListener("click", () => setActive(panel));
+      panel.addEventListener("focus", () => setActive(panel));
     });
-    track.addEventListener("pointermove", (e) => {
-      if (!down) return;
-      const dx = e.clientX - startX;
-      if (Math.abs(dx) > 3) moved = true;
-      track.scrollLeft = startLeft - dx;
-    });
-    const endDrag = (e) => {
-      if (!down) return;
-      down = false;
-      track.classList.remove("is-dragging");
-      try { track.releasePointerCapture(e.pointerId); } catch (_) {}
-    };
-    track.addEventListener("pointerup", endDrag);
-    track.addEventListener("pointercancel", endDrag);
-    // Swallow the click that follows a drag
-    track.addEventListener("click", (e) => {
-      if (moved) { e.preventDefault(); e.stopPropagation(); }
-    }, true);
-
-    track.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    update();
   }
 })();
