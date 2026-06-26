@@ -551,50 +551,26 @@ body.menu-open .mobile-menu__links a {
 }
 .visit__social a:hover::after { transform: scaleX(1); transform-origin: left; }
 
-/* Form */
-.visit__form-wrap {
+/* Pop-in card */
+.visit__cta {
   background: var(--cream); border-radius: var(--radius);
   padding: clamp(1.75rem, 4vw, 2.75rem);
   box-shadow: 0 24px 50px -30px rgba(92, 26, 38, 0.35);
 }
-.visit__form-title {
+.visit__cta-title {
   font-family: var(--font-display);
-  font-size: 1.6rem; font-weight: 500;
-  color: var(--maroon); margin-bottom: 1.75rem;
+  font-size: 1.8rem; font-weight: 500;
+  color: var(--maroon); margin-bottom: 0.85rem;
 }
-.field { position: relative; margin-bottom: 1.5rem; }
-.field input,
-.field textarea {
-  width: 100%; padding: 1.1rem 1rem 0.5rem;
-  border: 1px solid var(--line); border-radius: 10px;
-  background: var(--cream); font-family: inherit;
-  font-size: 0.95rem; color: var(--ink);
-  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
-  resize: vertical;
+.visit__cta-text {
+  color: var(--muted); margin-bottom: 1.75rem; max-width: 38ch;
 }
-.field textarea { padding-top: 1.4rem; }
-.field input:focus,
-.field textarea:focus {
-  outline: none; border-color: var(--rose);
-  box-shadow: 0 0 0 3px rgba(168, 54, 74, 0.15);
-}
-.field label {
-  position: absolute; left: 1rem; top: 0.95rem;
-  color: var(--muted); font-size: 0.95rem; pointer-events: none;
-  transition: transform 0.25s var(--ease), font-size 0.25s var(--ease), color 0.25s var(--ease);
-}
-.field input:focus + label,
-.field input:not(:placeholder-shown) + label,
-.field textarea:focus + label,
-.field textarea:not(:placeholder-shown) + label {
-  transform: translateY(-0.7rem);
-  font-size: 0.7rem; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--rose-deep);
-}
-.field.is-invalid input,
-.field.is-invalid textarea { border-color: #c0392f; }
-.visit__form-status {
-  margin-top: 1rem; font-size: 0.9rem; min-height: 1.2em; color: var(--rose-deep);
+.visit__cta-actions { display: flex; flex-direction: column; gap: 0.75rem; }
+.visit__cta-hours {
+  margin-top: 1.5rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem; letter-spacing: 0.04em;
+  color: var(--muted); text-align: center;
 }
 
 .visit__map {

@@ -164,43 +164,4 @@
     });
   });
 
-  /* ---------- Contact form (client-side demo) ---------- */
-  const form = $("#contactForm");
-  const status = $("#formStatus");
-  if (form) {
-    const fields = $$(".field input, .field textarea", form);
-    const validateField = (field) => {
-      const wrap = field.closest(".field");
-      let ok = field.value.trim() !== "";
-      if (ok && field.type === "email") {
-        ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
-      }
-      if (wrap) wrap.classList.toggle("is-invalid", !ok);
-      return ok;
-    };
-
-    fields.forEach((f) =>
-      f.addEventListener("blur", () => {
-        if (f.value.trim() !== "") validateField(f);
-      })
-    );
-
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const allOk = fields.map(validateField).every(Boolean);
-      if (!allOk) {
-        if (status) {
-          status.textContent = "Please fill in the highlighted fields.";
-          status.style.color = "#c0492f";
-        }
-        return;
-      }
-      const name = $("#name").value.trim().split(" ")[0];
-      if (status) {
-        status.style.color = "";
-        status.textContent = `Thanks${name ? ", " + name : ""}! We'll be in touch shortly. ☕`;
-      }
-      form.reset();
-    });
-  }
 })();
