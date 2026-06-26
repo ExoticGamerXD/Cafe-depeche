@@ -164,4 +164,90 @@
     });
   });
 
+  /* ---------- Testimonials carousel ---------- */
+  const reviewsSection = $("#reviews");
+  if (reviewsSection) {
+    // Replace with your real Google reviews any time.
+    const data = [
+      {
+        quote:
+          "Hands down the best flat white in Cork. The latte art alone is worth the trip — and the brunch keeps me coming back every weekend.",
+        name: "Aoife M.",
+        role: "Weekend regular",
+        img: "assets/img/review-1.jpg",
+      },
+      {
+        quote:
+          "Such a gem on Lancaster Quay. Cosy, full of character with the music posters everywhere, and the staff genuinely care. Coffee for the masses, done right.",
+        name: "Conor D.",
+        role: "Local",
+        img: "assets/img/review-2.jpg",
+      },
+      {
+        quote:
+          "We came for breakfast and stayed all morning. The full Irish is unreal and the coffee is top class. A proper Cork institution.",
+        name: "Méabh O.",
+        role: "Visitor",
+        img: "assets/img/review-3.jpg",
+      },
+    ];
+
+    const media = $("#reviewsMedia");
+    const quoteEl = $("#reviewsQuote");
+    const nameEl = $("#reviewsName");
+    const roleEl = $("#reviewsRole");
+    const prevBtn = $("#reviewsPrev");
+    const nextBtn = $("#reviewsNext");
+
+    // Build the stacked images once
+    const imgs = data.map((d, i) => {
+      const im = document.createElement("img");
+      im.src = d.img;
+      im.alt = "";
+      im.loading = "lazy";
+      im.className = "reviews__img";
+      media.appendChild(im);
+      return im;
+    });
+
+    let idx = 0;
+    const len = data.length;
+    const mod = (n) => ((n % len) + len) % len;
+
+    const render = () => {
+      imgs.forEach((im, i) => {
+        im.classList.remove("is-active", "is-prev", "is-next");
+        if (i === idx) im.classList.add("is-active");
+        else if (i === mod(idx - 1)) im.classList.add("is-prev");
+        else if (i === mod(idx + 1)) im.classList.add("is-next");
+      });
+      reviewsSection.classList.add("reviews--fading");
+      setTimeout(() => {
+        quoteEl.textContent = data[idx].quote;
+        nameEl.textContent = data[idx].name;
+        roleEl.textContent = data[idx].role;
+        reviewsSection.classList.remove("reviews--fading");
+      }, prefersReduced ? 0 : 220);
+    };
+
+    const go = (n) => { idx = mod(n); render(); restart(); };
+    if (prevBtn) prevBtn.addEventListener("click", () => go(idx - 1));
+    if (nextBtn) nextBtn.addEventListener("click", () => go(idx + 1));
+
+    // Auto-advance (paused on hover/focus, skipped for reduced motion)
+    let timer = null;
+    const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+    const restart = () => {
+      stop();
+      if (prefersReduced) return;
+      timer = setInterval(() => { idx = mod(idx + 1); render(); }, 6000);
+    };
+    reviewsSection.addEventListener("mouseenter", stop);
+    reviewsSection.addEventListener("mouseleave", restart);
+    reviewsSection.addEventListener("focusin", stop);
+    reviewsSection.addEventListener("focusout", restart);
+
+    render();
+    restart();
+  }
 })();
