@@ -704,6 +704,96 @@ body.menu-open .mobile-menu__links a {
 .reviews__btn:hover { background: var(--maroon); color: var(--cream); transform: translateY(-2px); }
 
 /* ============================================================
+   Handcrafted micro-interactions
+   ============================================================ */
+
+/* Editorial heading reveal — text rises from behind a mask */
+.section-title.reveal { opacity: 1; transform: none; }
+.section-title {
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: calc(1.5rem - 0.12em);
+}
+.title-line {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform 1.05s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.section-title.is-visible .title-line { transform: translateY(0); }
+
+/* Menu "spotlight" — focus the hovered dish, recede the rest */
+.menu__item {
+  transition: opacity 0.45s var(--ease);
+}
+.menu__item-name {
+  display: inline-block;
+  transition: transform 0.4s var(--ease), color 0.3s var(--ease);
+}
+.menu__item-price { transition: color 0.3s var(--ease); }
+.menu__list:hover .menu__item:not(:hover) { opacity: 0.4; }
+.menu__item:hover .menu__item-name { transform: translateX(5px); color: var(--cream); }
+.menu__item:hover .menu__item-price { color: var(--cream); }
+
+/* Marquee rests when you look at it */
+.marquee:hover .marquee__track { animation-play-state: paused; }
+
+/* Gallery — a curated caption rises on hover */
+.gallery__cap {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 1.6rem 1.2rem 1.1rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem; font-weight: 500; letter-spacing: 0.01em;
+  color: var(--cream);
+  background: linear-gradient(to top, rgba(26, 8, 16, 0.78), rgba(26, 8, 16, 0) 100%);
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  pointer-events: none;
+}
+.gallery__item:hover .gallery__cap,
+.gallery__item:focus-within .gallery__cap { opacity: 1; transform: translateY(0); }
+
+/* Live opening status + today's row */
+.visit__status {
+  display: inline-flex; align-items: center; gap: 0.45em;
+  font-family: var(--font-body);
+  font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.32em 0.65em; border-radius: 999px;
+  vertical-align: middle; margin-left: 0.5rem;
+}
+.visit__status::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor;
+}
+.visit__status--open { color: #2f7d4f; background: rgba(47, 125, 79, 0.12); }
+.visit__status--open::before { animation: statusPulse 2.4s var(--ease) infinite; }
+.visit__status--closed { color: var(--rose-deep); background: rgba(122, 37, 53, 0.1); }
+@keyframes statusPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(47, 125, 79, 0.5); }
+  70%  { box-shadow: 0 0 0 6px rgba(47, 125, 79, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(47, 125, 79, 0); }
+}
+.visit__hours li {
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.visit__hours li.is-today {
+  margin-left: -0.85rem; padding-left: 0.85rem;
+  border-left: 2px solid var(--maroon);
+}
+.visit__hours li.is-today span { color: var(--maroon); font-weight: 600; }
+
+/* Footer links — same underline wipe as the top nav */
+.footer__nav a { position: relative; }
+.footer__nav a::after {
+  content: ""; position: absolute; left: 0; bottom: -3px;
+  width: 100%; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: right;
+  transition: transform 0.4s var(--ease);
+}
+.footer__nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* ============================================================
    Footer
    ============================================================ */
 .footer {
@@ -806,7 +896,7 @@ body.menu-open .mobile-menu__links a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .reveal, .reveal-word { opacity: 1 !important; transform: none !important; }
+  .reveal, .reveal-word, .title-line { opacity: 1 !important; transform: none !important; }
   .hero__bg img { transform: scale(1); }
   .marquee__track { animation: none; }
 }

@@ -251,4 +251,37 @@
     render();
     restart();
   }
+
+  /* ---------- Live opening status + today's row ---------- */
+  const hoursList = $(".visit__hours");
+  const statusEl = $("#openStatus");
+  if (hoursList && statusEl) {
+    // minutes-from-midnight ranges per weekday (0 = Sun … 6 = Sat); null = closed
+    const sched = {
+      1: [390, 960],  // Mon 6:30–16:00
+      2: [390, 960],  // Tue
+      3: [390, 990],  // Wed 6:30–16:30
+      4: [390, 990],  // Thu
+      5: [390, 1020], // Fri 6:30–17:00
+    };
+
+    // Resolve "now" in the café's timezone, wherever the visitor is
+    const dublin = new Date(
+      new Date().toLocaleString("en-US", { timeZone: "Europe/Dublin" })
+    );
+    const day = dublin.getDay();
+    const mins = dublin.getHours() * 60 + dublin.getMinutes();
+
+    $$(".visit__hours li").forEach((li) => {
+      const days = (li.getAttribute("data-days") || "")
+        .split(",")
+        .map(Number);
+      if (days.includes(day)) li.classList.add("is-today");
+    });
+
+    const t = sched[day];
+    const isOpen = !!t && mins >= t[0] && mins < t[1];
+    statusEl.textContent = isOpen ? "Open now" : "Closed";
+    statusEl.classList.add(isOpen ? "visit__status--open" : "visit__status--closed");
+  }
 })();

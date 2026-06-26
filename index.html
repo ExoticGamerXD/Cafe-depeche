@@ -134,7 +134,7 @@
         <div class="about__text">
           <p class="section-eyebrow reveal" data-reveal>Our Story</p>
           <h2 class="section-title reveal" data-reveal data-reveal-delay="80">
-            Born in Cork, 2003. Named for the music.
+            <span class="title-line">Born in Cork, 2003. Named for the music.</span>
           </h2>
           <p class="reveal" data-reveal data-reveal-delay="160">
             Café Depeche has been part of Cork life since 2003 — a Lancaster Quay
@@ -172,7 +172,7 @@
       <div class="bento__head">
         <p class="section-eyebrow reveal" data-reveal>Why Depeche</p>
         <h2 class="section-title reveal" data-reveal data-reveal-delay="80">
-          A Cork institution, in a few words.
+          <span class="title-line">A Cork institution, in a few words.</span>
         </h2>
       </div>
 
@@ -220,7 +220,7 @@
       <div class="menu__head">
         <p class="section-eyebrow reveal" data-reveal>The Menu</p>
         <h2 class="section-title reveal" data-reveal data-reveal-delay="80">
-          Pulled with care. Baked today.
+          <span class="title-line">Pulled with care. Baked today.</span>
         </h2>
         <p class="menu__note reveal" data-reveal data-reveal-delay="160">
           The brunch menu is seasonal — ask us what's good today. Coffee served Mon–Fri from 6:30am.
@@ -404,28 +404,34 @@
       <div class="gallery__head">
         <p class="section-eyebrow reveal" data-reveal>The Room</p>
         <h2 class="section-title reveal" data-reveal data-reveal-delay="80">
-          A little corner of calm.
+          <span class="title-line">A little corner of calm.</span>
         </h2>
       </div>
 
       <div class="gallery__grid">
         <figure class="gallery__item gallery__item--tall reveal" data-reveal>
           <img src="assets/img/gallery-1.jpg" alt="A full Irish brunch on a red plate at Café Depeche" loading="lazy" />
+          <figcaption class="gallery__cap">The full Irish</figcaption>
         </figure>
         <figure class="gallery__item reveal" data-reveal data-reveal-delay="100">
           <img src="assets/img/gallery-2.jpg" alt="The Depeche fry-up with sourdough, eggs and black pudding" loading="lazy" />
+          <figcaption class="gallery__cap">Brunch, done properly</figcaption>
         </figure>
         <figure class="gallery__item reveal" data-reveal data-reveal-delay="200">
           <img src="assets/img/gallery-3.jpg" alt="A dusted cappuccino in a red cup" loading="lazy" />
+          <figcaption class="gallery__cap">Dusted cappuccino</figcaption>
         </figure>
         <figure class="gallery__item gallery__item--wide reveal" data-reveal data-reveal-delay="100">
           <img src="assets/img/gallery-4.jpg" alt="Café Depeche storefront with outdoor seating on Lancaster Quay" loading="lazy" />
+          <figcaption class="gallery__cap">Lancaster Quay</figcaption>
         </figure>
         <figure class="gallery__item reveal" data-reveal data-reveal-delay="200">
           <img src="assets/img/gallery-5.jpg" alt="A pot of tea with a cinnamon bun" loading="lazy" />
+          <figcaption class="gallery__cap">Tea &amp; a cinnamon bun</figcaption>
         </figure>
         <figure class="gallery__item reveal" data-reveal data-reveal-delay="300">
           <img src="assets/img/gallery-6.jpg" alt="A sausage roll with a flat white and feather latte art" loading="lazy" />
+          <figcaption class="gallery__cap">Flat white &amp; a sausage roll</figcaption>
         </figure>
       </div>
     </section>
@@ -435,7 +441,7 @@
       <div class="reviews__head">
         <p class="section-eyebrow reveal" data-reveal>Kind Words</p>
         <h2 class="section-title reveal" data-reveal data-reveal-delay="80">
-          Loved by Cork.
+          <span class="title-line">Loved by Cork.</span>
         </h2>
       </div>
 
@@ -464,7 +470,7 @@
         <div class="visit__info">
           <p class="section-eyebrow reveal" data-reveal>Visit Us</p>
           <h2 class="section-title reveal" data-reveal data-reveal-delay="80">
-            On the quay, by the river.
+            <span class="title-line">On the quay, by the river.</span>
           </h2>
 
           <div class="visit__details reveal" data-reveal data-reveal-delay="160">
@@ -474,12 +480,12 @@
             </div>
 
             <div class="visit__block">
-              <h3>Opening hours</h3>
+              <h3>Opening hours <span class="visit__status" id="openStatus" aria-live="polite"></span></h3>
               <ul class="visit__hours">
-                <li><span>Mon &amp; Tue</span><span>6:30 – 16:00</span></li>
-                <li><span>Wed &amp; Thu</span><span>6:30 – 16:30</span></li>
-                <li><span>Friday</span><span>6:30 – 17:00</span></li>
-                <li><span class="visit__closed">Sat &amp; Sun</span><span class="visit__closed">Closed</span></li>
+                <li data-days="1,2"><span>Mon &amp; Tue</span><span>6:30 – 16:00</span></li>
+                <li data-days="3,4"><span>Wed &amp; Thu</span><span>6:30 – 16:30</span></li>
+                <li data-days="5"><span>Friday</span><span>6:30 – 17:00</span></li>
+                <li data-days="0,6"><span class="visit__closed">Sat &amp; Sun</span><span class="visit__closed">Closed</span></li>
               </ul>
             </div>
 
