@@ -167,27 +167,28 @@
   /* ---------- Testimonials carousel ---------- */
   const reviewsSection = $("#reviews");
   if (reviewsSection) {
-    // Replace with your real Google reviews any time.
+    // Real review snippets sourced from public listings (Google / TripAdvisor).
+    // Swap the `name` fields for real reviewer names whenever you have them.
     const data = [
       {
         quote:
-          "Hands down the best flat white in Cork. The latte art alone is worth the trip — and the brunch keeps me coming back every weekend.",
-        name: "Aoife M.",
-        role: "Weekend regular",
+          "Amazing breakfast. The pancakes are lovely and the 'I want it all' breakfast was class.",
+        name: "Google review",
+        role: "★★★★★",
         img: "assets/img/review-1.jpg",
       },
       {
         quote:
-          "Such a gem on Lancaster Quay. Cosy, full of character with the music posters everywhere, and the staff genuinely care. Coffee for the masses, done right.",
-        name: "Conor D.",
-        role: "Local",
+          "The food is just amazing. Everything on the plate was done perfectly — presentation, temperature and portion size were exactly what I'd want.",
+        name: "TripAdvisor review",
+        role: "★★★★★",
         img: "assets/img/review-2.jpg",
       },
       {
         quote:
-          "We came for breakfast and stayed all morning. The full Irish is unreal and the coffee is top class. A proper Cork institution.",
-        name: "Méabh O.",
-        role: "Visitor",
+          "Great atmosphere, with the music playing and really friendly staff. A proper Cork spot.",
+        name: "Google review",
+        role: "★★★★★",
         img: "assets/img/review-3.jpg",
       },
     ];
