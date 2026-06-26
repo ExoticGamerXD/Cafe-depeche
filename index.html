@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%95%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
 
   <link rel="stylesheet" href="css/styles.css" />
 </head>
@@ -25,7 +25,14 @@
   <!-- Page loader -->
   <div class="loader" id="loader" aria-hidden="true">
     <div class="loader__mark">
-      <span class="loader__cup">☕</span>
+      <span class="loader__cup">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 8.5h11v4a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/>
+          <path d="M16 9.8h1.8a2 2 0 0 1 0 4H16"/>
+          <path d="M8 3.6c-.6.9-.6 1.7 0 2.6"/>
+          <path d="M11.5 3.6c-.6.9-.6 1.7 0 2.6"/>
+        </svg>
+      </span>
       <span class="loader__name">Café Depeche</span>
     </div>
   </div>
@@ -178,37 +185,56 @@
 
       <div class="bento__grid">
         <article class="bento__tile bento__tile--feature reveal" data-reveal>
-          <span class="bento__emoji">🏆</span>
+          <svg class="bento__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3.6l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.55l-4.7 2.5.9-5.23-3.8-3.7 5.25-.76z"/>
+          </svg>
           <h3 class="bento__title">Food Awards Ireland 2024</h3>
           <p class="bento__text">Oceanic Regional Winner — recognised for the food we're proud to serve every day.</p>
         </article>
 
         <article class="bento__tile bento__tile--wide reveal" data-reveal data-reveal-delay="80">
-          <span class="bento__emoji">☕</span>
+          <svg class="bento__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 8.5h11v4a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/>
+            <path d="M16 9.8h1.8a2 2 0 0 1 0 4H16"/>
+            <path d="M8 3.6c-.6.9-.6 1.7 0 2.6"/>
+            <path d="M11.5 3.6c-.6.9-.6 1.7 0 2.6"/>
+          </svg>
           <h3 class="bento__title">Coffee from 6:30am</h3>
           <p class="bento__text">Early doors, Monday to Friday. Serious latte art, no fuss — coffee for the masses.</p>
         </article>
 
         <article class="bento__tile reveal" data-reveal data-reveal-delay="160">
-          <span class="bento__emoji">🍳</span>
+          <svg class="bento__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <ellipse cx="12" cy="12" rx="8.5" ry="6.5"/>
+            <circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/>
+          </svg>
           <h3 class="bento__title">All-day brunch</h3>
           <p class="bento__text">Generous, proper, and made to order.</p>
         </article>
 
         <article class="bento__tile reveal" data-reveal data-reveal-delay="240">
-          <span class="bento__emoji">🎵</span>
+          <svg class="bento__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <circle cx="12" cy="12" r="3.4"/>
+            <circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/>
+          </svg>
           <h3 class="bento__title">The Depeche Mode wall</h3>
           <p class="bento__text">Named for the band, wrapped in music history.</p>
         </article>
 
         <article class="bento__tile bento__tile--wide reveal" data-reveal data-reveal-delay="120">
-          <span class="bento__emoji">🔥</span>
+          <svg class="bento__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3.2c2.2 2.8 4 4.6 4 7.6a4 4 0 0 1-8 0c0-1.3.5-2.5 1.4-3.5.4 1.2 1.1 1.7 1.9 1.7-1.1-1.9-.2-4.3.7-5.8z"/>
+          </svg>
           <h3 class="bento__title">Born in Cork, 2003</h3>
           <p class="bento__text">A fireplace in the corner, framed music press on the walls, and two decades of regulars.</p>
         </article>
 
         <article class="bento__tile bento__tile--wide reveal" data-reveal data-reveal-delay="200">
-          <span class="bento__emoji">☀️</span>
+          <svg class="bento__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3.5 9.5c1.7-1.9 3.4-1.9 5 0s3.3 1.9 5 0 3.3-1.9 5 0"/>
+            <path d="M3.5 14.5c1.7-1.9 3.4-1.9 5 0s3.3 1.9 5 0 3.3-1.9 5 0"/>
+          </svg>
           <h3 class="bento__title">Seating on the quay</h3>
           <p class="bento__text">Pull up outside on Lancaster Quay and watch the city go by.</p>
         </article>
