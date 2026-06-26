@@ -434,31 +434,41 @@
         </h2>
       </div>
 
-      <div class="gallery__grid">
-        <figure class="gallery__item gallery__item--tall reveal" data-reveal>
-          <img src="assets/img/gallery-1.jpg" alt="A full Irish brunch on a red plate at Café Depeche" loading="lazy" />
-          <figcaption class="gallery__cap">The full Irish</figcaption>
-        </figure>
-        <figure class="gallery__item reveal" data-reveal data-reveal-delay="100">
-          <img src="assets/img/gallery-2.jpg" alt="The Depeche fry-up with sourdough, eggs and black pudding" loading="lazy" />
-          <figcaption class="gallery__cap">Brunch, done properly</figcaption>
-        </figure>
-        <figure class="gallery__item reveal" data-reveal data-reveal-delay="200">
-          <img src="assets/img/gallery-3.jpg" alt="A dusted cappuccino in a red cup" loading="lazy" />
-          <figcaption class="gallery__cap">Dusted cappuccino</figcaption>
-        </figure>
-        <figure class="gallery__item gallery__item--wide reveal" data-reveal data-reveal-delay="100">
-          <img src="assets/img/gallery-4.jpg" alt="Café Depeche storefront with outdoor seating on Lancaster Quay" loading="lazy" />
-          <figcaption class="gallery__cap">Lancaster Quay</figcaption>
-        </figure>
-        <figure class="gallery__item reveal" data-reveal data-reveal-delay="200">
-          <img src="assets/img/gallery-5.jpg" alt="A pot of tea with a cinnamon bun" loading="lazy" />
-          <figcaption class="gallery__cap">Tea &amp; a cinnamon bun</figcaption>
-        </figure>
-        <figure class="gallery__item reveal" data-reveal data-reveal-delay="300">
-          <img src="assets/img/gallery-6.jpg" alt="A sausage roll with a flat white and feather latte art" loading="lazy" />
-          <figcaption class="gallery__cap">Flat white &amp; a sausage roll</figcaption>
-        </figure>
+      <div class="gallery__carousel reveal" data-reveal>
+        <ul class="gallery__track" id="galleryTrack">
+          <li class="gallery__slide">
+            <img src="assets/img/gallery-1.jpg" alt="A full Irish brunch on a red plate at Café Depeche" loading="lazy" draggable="false" />
+            <figcaption class="gallery__cap">The full Irish</figcaption>
+          </li>
+          <li class="gallery__slide">
+            <img src="assets/img/gallery-2.jpg" alt="The Depeche fry-up with sourdough, eggs and black pudding" loading="lazy" draggable="false" />
+            <figcaption class="gallery__cap">Brunch, done properly</figcaption>
+          </li>
+          <li class="gallery__slide">
+            <img src="assets/img/gallery-3.jpg" alt="A dusted cappuccino in a red cup" loading="lazy" draggable="false" />
+            <figcaption class="gallery__cap">Dusted cappuccino</figcaption>
+          </li>
+          <li class="gallery__slide">
+            <img src="assets/img/gallery-4.jpg" alt="Café Depeche storefront with outdoor seating on Lancaster Quay" loading="lazy" draggable="false" />
+            <figcaption class="gallery__cap">Lancaster Quay</figcaption>
+          </li>
+          <li class="gallery__slide">
+            <img src="assets/img/gallery-5.jpg" alt="A pot of tea with a cinnamon bun" loading="lazy" draggable="false" />
+            <figcaption class="gallery__cap">Tea &amp; a cinnamon bun</figcaption>
+          </li>
+          <li class="gallery__slide">
+            <img src="assets/img/gallery-6.jpg" alt="A sausage roll with a flat white and feather latte art" loading="lazy" draggable="false" />
+            <figcaption class="gallery__cap">Flat white &amp; a sausage roll</figcaption>
+          </li>
+        </ul>
+
+        <div class="gallery__controls">
+          <div class="gallery__progress"><span class="gallery__progress-bar" id="galleryBar"></span></div>
+          <div class="gallery__arrows">
+            <button class="gallery__arrow" id="galleryPrev" aria-label="Previous photos">←</button>
+            <button class="gallery__arrow" id="galleryNext" aria-label="Next photos">→</button>
+          </div>
+        </div>
       </div>
     </section>
 

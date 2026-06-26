@@ -284,4 +284,69 @@
     statusEl.textContent = isOpen ? "Open now" : "Closed";
     statusEl.classList.add(isOpen ? "visit__status--open" : "visit__status--closed");
   }
+
+  /* ---------- Gallery carousel (native scroll-snap + drag + progress) ---------- */
+  const track = $("#galleryTrack");
+  if (track) {
+    const bar = $("#galleryBar");
+    const prevBtn = $("#galleryPrev");
+    const nextBtn = $("#galleryNext");
+
+    const stepSize = () => {
+      const slide = track.querySelector(".gallery__slide");
+      const gap = parseFloat(getComputedStyle(track).columnGap) || 16;
+      return slide ? slide.getBoundingClientRect().width + gap : track.clientWidth * 0.8;
+    };
+    const maxScroll = () => track.scrollWidth - track.clientWidth;
+
+    const update = () => {
+      const max = maxScroll();
+      const ratio = max > 0 ? Math.min(Math.max(track.scrollLeft / max, 0), 1) : 0;
+      const frac = track.clientWidth / track.scrollWidth; // thumb size
+      if (bar) {
+        bar.style.width = `${Math.max(frac * 100, 12)}%`;
+        bar.style.left = `${ratio * (100 - Math.max(frac * 100, 12))}%`;
+      }
+      if (prevBtn) prevBtn.disabled = track.scrollLeft <= 2;
+      if (nextBtn) nextBtn.disabled = track.scrollLeft >= max - 2;
+    };
+
+    const scrollByStep = (dir) => {
+      track.scrollBy({ left: dir * stepSize(), behavior: prefersReduced ? "auto" : "smooth" });
+    };
+    if (prevBtn) prevBtn.addEventListener("click", () => scrollByStep(-1));
+    if (nextBtn) nextBtn.addEventListener("click", () => scrollByStep(1));
+
+    // Drag-to-scroll for mouse/trackpad (touch uses native scrolling)
+    let down = false, startX = 0, startLeft = 0, moved = false;
+    track.addEventListener("pointerdown", (e) => {
+      if (e.pointerType === "touch") return;
+      down = true; moved = false;
+      startX = e.clientX; startLeft = track.scrollLeft;
+      track.classList.add("is-dragging");
+      track.setPointerCapture(e.pointerId);
+    });
+    track.addEventListener("pointermove", (e) => {
+      if (!down) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 3) moved = true;
+      track.scrollLeft = startLeft - dx;
+    });
+    const endDrag = (e) => {
+      if (!down) return;
+      down = false;
+      track.classList.remove("is-dragging");
+      try { track.releasePointerCapture(e.pointerId); } catch (_) {}
+    };
+    track.addEventListener("pointerup", endDrag);
+    track.addEventListener("pointercancel", endDrag);
+    // Swallow the click that follows a drag
+    track.addEventListener("click", (e) => {
+      if (moved) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+
+    track.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  }
 })();
